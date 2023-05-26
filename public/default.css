@@ -1,0 +1,55 @@
+h1 {
+  color: black; /* Textfarbe */
+  font-size: 50px; /* Schriftgröße */
+  font-weight: bold; /* Schriftstil fett */
+  text-align: center; /* Ausrichtung zentriert */
+  /* Weitere gewünschte CSS-Eigenschaften */
+}
+
+/* Container für den gesamten Chat-Bereich */
+#chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+/* Stil für die Eingabezeile */
+#message-input {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+/* Stil für den Sende-Button */
+#send-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Stil für einzelne Nachrichten */
+.message {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+/* Stil für den Zeitstempel */
+.timestamp {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* Stil für den Nachrichteninhalt */
+.content {
+  font-size: 16px;
+  /* Weitere Stileigenschaften für den Nachrichteninhalt */
+}

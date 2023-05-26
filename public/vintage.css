@@ -1,0 +1,47 @@
+body {
+  background-color: #f3f3f3;
+  font-family: "Courier New", monospace;
+  color: #333333;
+}
+
+h1 {
+  color: #993300;
+  text-align: center;
+}
+
+#style-selector {
+  margin-bottom: 20px;
+}
+
+#chat-container {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#messages {
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+input[type="text"],
+button {
+  font-family: "Courier New", monospace;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f9f9f9;
+}
+
+button {
+  background-color: #993300;
+  color: #ffffff;
+  cursor: pointer;
+}
