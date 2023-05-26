@@ -1,10 +1,11 @@
 const express = require("express");
-const app = express();
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const http = require("http");
+const path = require("path");
+const socketIO = require("socket.io");
 
-// Statische Dateien im "public" Verzeichnis bereitstellen
-app.use(express.static("public"));
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
 //Farben
 const colors = [
@@ -41,9 +42,17 @@ io.on("connection", function (socket) {
   });
 });
 
+// API-Route
+app.use("/api", require("./api/index"));
+
+// Statische Dateien und andere Routen
+app.use(express.static(path.join(__dirname, "public")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 // Server starten
-http.listen(3000, function () {
-  console.log(
-    "Server gestartet. Öffne http://localhost:3000 in einem Webbrowser."
-  );
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`Server läuft auf Port ${port}`);
 });
