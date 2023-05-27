@@ -6,6 +6,14 @@ h1 {
   /* Weitere gewünschte CSS-Eigenschaften */
 }
 
+h3 {
+  color: black; /* Textfarbe */
+  font-size: 13px; /* Schriftgröße */
+  font-weight: lighter; /* Schriftstil fett */
+  text-align: center; /* Ausrichtung zentriert */
+  /* Weitere gewünschte CSS-Eigenschaften */
+}
+
 #nickname-container {
   text-align: center;
   margin-top: 20px;

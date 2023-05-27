@@ -5,30 +5,37 @@
     <link rel="stylesheet" href="default.css" id="style-sheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
     <script src="skript.js"></script>
+    <style></style>
   </head>
   <body>
     <h1>The Crappy Chat Tool</h1>
-    <div id="nickname-container">
-      <form id="nickname-form">
-        <input type="text" id="nickname-input" placeholder="Nickname" />
-        <button type="submit">Set Nickname</button>
-      </form>
+    <div id="header-container">
+      <div id="style-selector">
+        <label for="style-select">Stil auswählen:</label>
+        <select id="style-select">
+          <option value="default" selected>Standard</option>
+          <option value="vintage">Oldy</option>
+          <option value="modern">siFi Trash</option>
+        </select>
+      </div>
+
+      <div id="nickname-container">
+        <form id="nickname-form">
+          <input type="text" id="nickname-input" placeholder="Nickname" />
+          <button type="submit">Set Nickname</button>
+        </form>
+        <h3>Nickname ist auf 25 Zeichen begrenzt</h3>
+      </div>
     </div>
 
-    <div id="error-message" class="error-message"></div>
-
-    <div id="style-selector">
-      <label for="style-select">Stil auswählen:</label>
-      <select id="style-select">
-        <option value="default" selected>Standard</option>
-        <option value="vintage">Oldy</option>
-        <option value="modern">siFi Trash</option>
-      </select>
-    </div>
     <div id="chat-container">
       <div id="messages"></div>
       <input type="text" id="message-input" />
       <button id="send-button">Senden</button>
+    </div>
+    <div id="user-list-container">
+      <h2>Wer ist Online?</h2>
+      <ul id="user-list"></ul>
     </div>
   </body>
 </html>

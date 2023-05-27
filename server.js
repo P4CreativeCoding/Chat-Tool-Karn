@@ -7,7 +7,7 @@ const path = require("path");
 // Statische Dateien im "public" Verzeichnis bereitstellen
 app.use(express.static("public"));
 
-//Farben
+// Farben
 const colors = [
   "#bd2b20",
   "#bdad20",
@@ -20,14 +20,28 @@ const colors = [
 ];
 const userColors = {};
 
+// Online-Benutzerliste
+const onlineUsers = [];
+
 // WebSocket-Verbindung herstellen
 io.on("connection", function (socket) {
   console.log("Neue Verbindung hergestellt");
 
   // Nickname für den Benutzer speichern
   socket.on("nickname", function (nickname) {
+    if (nickname.length > 25) {
+      // Nickname ist zu lang
+      socket.emit(
+        "nicknameError",
+        "Der Nickname darf nicht mehr als 25 Zeichen haben."
+      );
+      return;
+    }
+
     console.log("Nickname empfangen: " + nickname);
     socket.nickname = nickname; // Nickname im Socket speichern
+    onlineUsers.push(nickname); // Benutzer zur Online-Benutzerliste hinzufügen
+    io.emit("userLogin", onlineUsers); // Online-Benutzerliste an alle Sockets senden
   });
 
   // Farbe für den Benutzer auswählen
@@ -47,6 +61,18 @@ io.on("connection", function (socket) {
       color: userColors[socket.id],
       nickname: data.nickname,
     });
+  });
+
+  // Verbindung trennen
+  socket.on("disconnect", function () {
+    console.log("Verbindung getrennt");
+    if (socket.nickname) {
+      const index = onlineUsers.indexOf(socket.nickname);
+      if (index !== -1) {
+        onlineUsers.splice(index, 1); // Benutzer aus der Online-Benutzerliste entfernen
+        io.emit("userLogout", onlineUsers); // Aktualisierte Online-Benutzerliste an alle Sockets senden
+      }
+    }
   });
 });
 
