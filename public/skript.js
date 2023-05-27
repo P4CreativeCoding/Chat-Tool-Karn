@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (e) {
       e.preventDefault(); // Standardformular-Verhalten verhindern
       const nickname = nicknameInput.value.trim();
-      if (nickname.length > 25) {
+      if (nickname === "") {
+        // Kein Nickname eingegeben
+        alert("Bitte geben Sie einen Nickname ein.");
+      } else if (nickname.length > 25) {
         // Zu langer Nickname
         alert("Der Nickname darf maximal 25 Zeichen lang sein.");
         nicknameInput.value = ""; // Eingabefeld leeren
