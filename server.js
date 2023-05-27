@@ -24,6 +24,12 @@ const userColors = {};
 io.on("connection", function (socket) {
   console.log("Neue Verbindung hergestellt");
 
+  // Nickname für den Benutzer speichern
+  socket.on("nickname", function (nickname) {
+    console.log("Nickname empfangen: " + nickname);
+    socket.nickname = nickname; // Nickname im Socket speichern
+  });
+
   // Farbe für den Benutzer auswählen
   const userColor = colors[Math.floor(Math.random() * colors.length)];
 
@@ -31,13 +37,15 @@ io.on("connection", function (socket) {
   userColors[socket.id] = userColor;
 
   // Ereignis abonnieren: Nachricht senden
-  socket.on("message", function (message) {
-    console.log("Nachricht empfangen: " + message);
-    console.log(userColor);
+  socket.on("message", function (data) {
+    console.log("Nachricht empfangen: " + data.message);
+    console.log("Nickname: " + data.nickname);
+    console.log("Farbe: " + userColors[socket.id]);
     // Nachricht an alle anderen verbundenen Sockets senden
     io.emit("message", {
-      message: message,
+      message: data.message,
       color: userColors[socket.id],
+      nickname: data.nickname,
     });
   });
 });

@@ -6,6 +6,24 @@ h1 {
   /* Weitere gewünschte CSS-Eigenschaften */
 }
 
+#nickname-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#nickname-form {
+  display: inline-block;
+}
+
+#nickname-input {
+  padding: 5px;
+  margin-right: 5px;
+}
+
+#send-button {
+  margin-top: 10px;
+}
+
 /* Container für den gesamten Chat-Bereich */
 #chat-container {
   max-width: 600px;
