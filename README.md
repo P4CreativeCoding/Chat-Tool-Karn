@@ -1,2 +1,2 @@
 # The Crappy Chat Tool
-Try it yourself: https://crappy-chat-tool.onrender.com/
+Try it yourself: https://the-crappy-chat-tool.onrender.com/
