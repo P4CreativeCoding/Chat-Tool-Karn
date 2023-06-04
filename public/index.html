@@ -9,6 +9,21 @@
   </head>
   <body>
     <h1>The Crappy Chat Tool</h1>
+
+    <div id="popup-overlay">
+      <div id="popup-content">
+        <h2>Anmeldung erforderlich</h2>
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Passwort"
+          required
+        />
+        <button id="login-button">Anmelden</button>
+        <div id="login-error-message"></div>
+      </div>
+    </div>
+
     <div id="header-container">
       <div id="style-selector">
         <label for="style-select">Stil auswählen:</label>

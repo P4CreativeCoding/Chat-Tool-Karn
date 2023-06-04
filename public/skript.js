@@ -8,12 +8,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const sendButton = document.getElementById("send-button");
   const styleSelect = document.getElementById("style-select");
   const styleSheet = document.getElementById("style-sheet");
+  const popupOverlay = document.getElementById("popup-overlay");
+  const passwordInput = document.getElementById("password-input");
+  const loginButton = document.getElementById("login-button");
+  const loginErrorMessage = document.getElementById("login-error-message");
+
+  // Ereignis abonnieren: Anmelden-Button geklickt
+  loginButton.addEventListener("click", function () {
+    const password = passwordInput.value.trim();
+
+    if (password !== "1234") {
+      // Falsches Passwort
+      displayLoginError("Falsches Passwort");
+    } else {
+      // Richtiges Passwort
+      hideLoginPopup();
+      showChatArea();
+    }
+  });
+
+  // Funktion zum Anzeigen von Anmeldefehlern
+  function displayLoginError(errorMessage) {
+    loginErrorMessage.innerText = errorMessage;
+    loginErrorMessage.style.display = "block";
+  }
+
+  // Funktion zum Ausblenden des Popup-Fensters
+  function hideLoginPopup() {
+    popupOverlay.style.display = "none";
+  }
+
+  // Funktion zum Anzeigen des Chat-Bereichs
+  function showChatArea() {
+    const chatContainer = document.getElementById("chat-container");
+    chatContainer.style.display = "block";
+  }
 
   //Nickname abrufen
   const nicknameInput = document.getElementById("nickname-input");
-  const nicknameForm = document.getElementById("nickname-form");
-
-  let nickname = "";
 
   // Ereignis abonnieren: Nachricht empfangen
   socket.on("message", function (data) {
@@ -43,6 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
         nicknameInput.disabled = true; // Eingabefeld deaktivieren
       }
     });
+
+  // Ereignis abonnieren: Eingabetaste im Nachrichten-Eingabefeld gedrückt
+  messageInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Standardverhalten der Eingabetaste verhindern
+      sendButton.click(); // Den "Senden"-Button künstlich klicken
+    }
+  });
 
   // Ereignis abonnieren: Senden-Button geklickt
   sendButton.addEventListener("click", function () {
@@ -136,4 +176,11 @@ document.addEventListener("DOMContentLoaded", function () {
       userList.appendChild(listItem);
     });
   }
+  // Ereignis abonnieren: Eingabetaste im Passwort-Eingabefeld gedrückt
+  passwordInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Standardverhalten der Eingabetaste verhindern
+      loginButton.click(); // Den "Anmelden"-Button künstlich klicken
+    }
+  });
 });

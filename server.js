@@ -3,11 +3,12 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const path = require("path");
+const requiredPassword = "HALLO";
 
 // Statische Dateien im "public" Verzeichnis bereitstellen
 app.use(express.static("public"));
 
-// Farben
+// Farben für User
 const colors = [
   "#bd2b20",
   "#bdad20",
@@ -26,6 +27,19 @@ const onlineUsers = [];
 // WebSocket-Verbindung herstellen
 io.on("connection", function (socket) {
   console.log("Neue Verbindung hergestellt");
+  console.log("Das Passwort lautet: 1234");
+  socket.on("login", function (data) {
+    const password = data.password;
+
+    if (password !== requiredPassword) {
+      // Passwort ist nicht korrekt
+      socket.emit("loginError", "Falsches Passwort");
+      return;
+    }
+
+    // Pop-up-Fenster schließen
+    socket.emit("closeLoginPopup");
+  });
 
   // Nickname für den Benutzer speichern
   socket.on("nickname", function (nickname) {
