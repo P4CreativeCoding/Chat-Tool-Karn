@@ -43,6 +43,8 @@ h1 {
 }
 
 .message {
+  width: 100%;
+  word-break: break-all;
   padding: 5px;
   background-color: #f9f9f9;
   border: 1px solid #cccccc;

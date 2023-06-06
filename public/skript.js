@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (e) {
       e.preventDefault(); // Standardformular-Verhalten verhindern
       if (nicknameSet) {
-        alert("Der Nickname wurde bereits festgelegt und kann nicht geändert werden.");
+        alert(
+          "Der Nickname wurde bereits festgelegt und kann nicht geändert werden."
+        );
         return;
       }
       const nickname = nicknameInput.value.trim();
