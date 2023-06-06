@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Nickname abrufen
   const nicknameInput = document.getElementById("nickname-input");
+  let nicknameSet = false;
 
   // Ereignis abonnieren: Nachricht empfangen
   socket.on("message", function (data) {
@@ -61,6 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("nickname-form")
     .addEventListener("submit", function (e) {
       e.preventDefault(); // Standardformular-Verhalten verhindern
+      if (nicknameSet) {
+        alert("Der Nickname wurde bereits festgelegt und kann nicht geändert werden.");
+        return;
+      }
       const nickname = nicknameInput.value.trim();
       if (nickname === "") {
         // Kein Nickname eingegeben
@@ -73,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Nickname senden
         socket.emit("nickname", nickname);
         nicknameInput.disabled = true; // Eingabefeld deaktivieren
+        nicknameSet = true;
       }
     });
 
