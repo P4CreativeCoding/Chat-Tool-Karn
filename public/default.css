@@ -63,6 +63,8 @@ h3 {
 
 /* Stil für einzelne Nachrichten */
 .message {
+  width: 100%;
+  word-break: break-all;
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
