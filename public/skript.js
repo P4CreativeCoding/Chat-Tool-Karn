@@ -1,3 +1,5 @@
+//Was geeht, hab gehört das wurde schon gefixt :D
+
 document.addEventListener("DOMContentLoaded", function () {
   // Verbindung zum WebSocket-Server herstellen
   const socket = io();
