@@ -1,5 +1,3 @@
-//Was geeht, hab gehört das wurde schon gefixt :D
-
 document.addEventListener("DOMContentLoaded", function () {
   // Verbindung zum WebSocket-Server herstellen
   const socket = io();
@@ -133,39 +131,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Nachricht im Chat anzeigen
-function displayMessage(message, color, sender, timestamp) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("message");
+  function displayMessage(message, color, sender, timestamp) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message");
 
-  const senderElement = document.createElement("div");
-  senderElement.classList.add("sender");
-  senderElement.style.color = color; // Farbe nur auf den Nicknamen anwenden
-  senderElement.textContent = sender;
-  senderElement.style.fontWeight = "bold";
+    const senderElement = document.createElement("div");
+    senderElement.classList.add("sender");
+    senderElement.style.color = color; // Farbe nur auf den Nicknamen anwenden
+    senderElement.textContent = sender;
+    senderElement.style.fontWeight = "bold";
 
-  const timestampElement = document.createElement("div");
-  timestampElement.classList.add("timestamp");
-  timestampElement.textContent = timestamp;
+    const timestampElement = document.createElement("div");
+    timestampElement.classList.add("timestamp");
+    timestampElement.textContent = timestamp;
 
-  const contentElement = document.createElement("span");
-  contentElement.innerHTML = parseMessageContent(message); // Den Text als HTML interpretieren
+    const contentElement = document.createElement("span");
+    contentElement.innerHTML = parseMessageContent(message); // Den Text als HTML interpretieren
 
-  messageElement.appendChild(senderElement);
-  messageElement.appendChild(timestampElement);
-  messageElement.appendChild(contentElement);
-  messagesContainer.appendChild(messageElement);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
+    messageElement.appendChild(senderElement);
+    messageElement.appendChild(timestampElement);
+    messageElement.appendChild(contentElement);
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
 
-// Funktion zum Analysieren und Klickbar-Machen von Links im Text
-function parseMessageContent(text) {
-  const urlRegex = /(https?:\/\/[^\s]+)/g; // Regex-Muster für URLs
+  // Funktion zum Analysieren und Klickbar-Machen von Links im Text
+  function parseMessageContent(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g; // Regex-Muster für URLs
 
-  // Ersetze URLs im Text durch klickbare Links
-  return text.replace(urlRegex, function (url) {
-    return '<a href="' + url + '" target="_blank">' + url + '</a>';
-  });
-}
+    // Ersetze URLs im Text durch klickbare Links
+    return text.replace(urlRegex, function (url) {
+      return '<a href="' + url + '" target="_blank">' + url + "</a>";
+    });
+  }
 
   // Aktuellen Zeitstempel abrufen
   function getCurrentTime() {
