@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const http = require("http").Server(app);
@@ -24,11 +25,12 @@ const userColors = {};
 const onlineUsers = [];
 
 // WebSocket-Verbindung herstellen
+// WebSocket-Verbindung herstellen
 io.on("connection", function (socket) {
   console.log("Neue Verbindung hergestellt");
-  console.log("Das Passwort lautet: 1234");
   socket.on("login", function (data) {
     const password = data.password;
+    const requiredPassword = process.env.PASSWORD; // Umgebungsvariable laden
 
     if (password !== requiredPassword) {
       // Passwort ist nicht korrekt

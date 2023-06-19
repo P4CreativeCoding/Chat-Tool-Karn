@@ -8,33 +8,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const sendButton = document.getElementById("send-button");
   const styleSelect = document.getElementById("style-select");
   const styleSheet = document.getElementById("style-sheet");
-  const popupOverlay = document.getElementById("popup-overlay");
   const passwordInput = document.getElementById("password-input");
   const loginButton = document.getElementById("login-button");
-  const loginErrorMessage = document.getElementById("login-error-message");
 
   // Ereignis abonnieren: Anmelden-Button geklickt
   loginButton.addEventListener("click", function () {
     const password = passwordInput.value.trim();
+    socket.emit("login", { password: password });
+  });
 
-    if (password !== "1234") {
-      // Falsches Passwort
-      displayLoginError("Falsches Passwort");
-    } else {
-      // Richtiges Passwort
-      hideLoginPopup();
-      showChatArea();
-    }
+  // Ereignis abonnieren: Fehlermeldung bei falschem Passwort
+  socket.on("loginError", function (errorMessage) {
+    // Falsches Passwort
+    displayLoginError(errorMessage);
+  });
+
+  // Ereignis abonnieren: Pop-up-Fenster schließen
+  socket.on("closeLoginPopup", function () {
+    // Richtiges Passwort
+    hideLoginPopup();
+    showChatArea();
   });
 
   // Funktion zum Anzeigen von Anmeldefehlern
   function displayLoginError(errorMessage) {
+    const loginErrorMessage = document.getElementById("login-error-message");
     loginErrorMessage.innerText = errorMessage;
     loginErrorMessage.style.display = "block";
   }
 
   // Funktion zum Ausblenden des Popup-Fensters
   function hideLoginPopup() {
+    const popupOverlay = document.getElementById("popup-overlay");
     popupOverlay.style.display = "none";
   }
 
@@ -43,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatContainer = document.getElementById("chat-container");
     chatContainer.style.display = "block";
   }
-
   //Nickname abrufen
   const nicknameInput = document.getElementById("nickname-input");
   let nicknameSet = false;
