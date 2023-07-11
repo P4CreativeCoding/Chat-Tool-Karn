@@ -1,3 +1,5 @@
+//ChatGPT hat geholfen: https://chat.openai.com/share/e2afae36-5cb2-4cb8-908a-de90e49cb74e
+
 require("dotenv").config();
 const express = require("express");
 const app = express();
@@ -24,7 +26,6 @@ const userColors = {};
 // Online-Benutzerliste
 const onlineUsers = [];
 
-// WebSocket-Verbindung herstellen
 // WebSocket-Verbindung herstellen
 io.on("connection", function (socket) {
   console.log("Neue Verbindung hergestellt");
